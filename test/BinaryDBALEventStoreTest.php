@@ -11,7 +11,7 @@
 
 namespace Broadway\EventStore\Dbal;
 
-use Broadway\Domain\DomainEventStream;
+use Broadway\Domain\EagerDomainEventStream;
 use Broadway\Serializer\SimpleInterfaceSerializer;
 use Broadway\UuidGenerator\Converter\BinaryUuidConverter;
 use Broadway\UuidGenerator\Rfc4122\Version4Generator;
@@ -71,7 +71,7 @@ class BinaryDBALEventStoreTest extends DBALEventStoreTest
     public function it_throws_an_exception_when_an_id_is_no_uuid_in_binary_mode()
     {
         $id                = 'bleeh';
-        $domainEventStream = new DomainEventStream([
+        $domainEventStream = new EagerDomainEventStream([
             $this->createDomainMessage($id, 0),
         ]);
 

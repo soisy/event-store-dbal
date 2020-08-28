@@ -14,6 +14,7 @@ namespace Broadway\EventStore\Dbal;
 use Broadway\Domain\DateTime;
 use Broadway\Domain\DomainEventStream;
 use Broadway\Domain\DomainMessage;
+use Broadway\Domain\EagerDomainEventStream;
 use Broadway\EventStore\EventStore;
 use Broadway\EventStore\EventStreamNotFoundException;
 use Broadway\EventStore\EventVisitor;
@@ -97,7 +98,7 @@ class DBALEventStore implements EventStore, EventStoreManagement
             throw new EventStreamNotFoundException(sprintf('EventStream not found for aggregate with id %s for table %s', $id, $this->tableName));
         }
 
-        return new DomainEventStream($events);
+        return new EagerDomainEventStream($events);
     }
 
     /**
@@ -115,7 +116,7 @@ class DBALEventStore implements EventStore, EventStoreManagement
             $events[] = $this->deserializeEvent($row);
         }
 
-        return new DomainEventStream($events);
+        return new EagerDomainEventStream($events);
     }
 
     /**
